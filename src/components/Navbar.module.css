@@ -19,11 +19,15 @@
 
 .brand {
   color: var(--accent);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   text-decoration: none;
+  /* Prevent brand from getting squeezed */
+  flex-shrink: 0;
+  max-width: 55vw;
+  line-height: 1.3;
 }
 
 .navigation {
@@ -67,18 +71,20 @@
   display: flex;
   align-items: center;
   gap: 0.85rem;
+  flex-shrink: 0;
 }
 
 .reserveButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.9rem 1.4rem;
+  padding: 0.7rem 1.2rem;
   border-radius: 999px;
   background: var(--accent);
   color: #080707;
   text-decoration: none;
   font-weight: 700;
+  font-size: 0.9rem;
   box-shadow: 0 18px 38px rgba(247, 163, 36, 0.22);
   transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
@@ -93,10 +99,11 @@
   background: var(--surface-strong);
   color: var(--text-bright);
   border-radius: 999px;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   transition: background 0.25s ease, transform 0.2s ease, border-color 0.25s ease;
+  flex-shrink: 0;
 }
 
 .themeToggle:hover {
@@ -116,6 +123,7 @@
   cursor: pointer;
   flex-direction: column;
   justify-content: space-between;
+  flex-shrink: 0;
 }
 
 .burger span {
@@ -139,21 +147,25 @@
   transform: translateY(-8px) rotate(-45deg);
 }
 
+/* Mobile nav drawer */
 @media (max-width: 900px) {
   .navigation {
     position: fixed;
     top: 0;
     right: 0;
     min-height: 100vh;
-    width: min(340px, 80vw);
+    min-height: 100dvh;
+    width: min(320px, 80vw);
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.75rem;
     padding: 5rem 1.5rem;
-    background: rgba(7, 8, 11, 0.95);
+    background: rgba(7, 8, 11, 0.97);
+    backdrop-filter: blur(20px);
     transform: translateX(100%);
     opacity: 0;
+    z-index: 130;
   }
 
   .open {
@@ -162,10 +174,32 @@
   }
 
   .navLink {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
   }
 
   .burger {
     display: flex;
+  }
+
+  /* Hide desktop Reserve button — it's in the drawer */
+  .reserveButton {
+    display: none;
+  }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+  .navbar {
+    padding: 0.85rem 1rem;
+  }
+
+  .brand {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+  }
+
+  .themeToggle {
+    width: 36px;
+    height: 36px;
   }
 }
