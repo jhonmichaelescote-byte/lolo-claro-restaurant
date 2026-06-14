@@ -2,7 +2,6 @@ import lumpiaIMG from '../assets/lumpia.jpg';
 import crispypataImg from '../assets/crispy-pata.jpg';
 import chopsueyImg from '../assets/chopsuey.jpg';
 import freshlumpiaubodImg from '../assets/fresh-lumpia-ubod.jpg';
-import karekareImg from '../assets/kare-kare.jpg';
 import halohaloImg from '../assets/halo-halo.jpg';
 import lecheflanImg from '../assets/lechr-flan.jpg';
 import pjuiceImg from '../assets/pjuice.jpg';
