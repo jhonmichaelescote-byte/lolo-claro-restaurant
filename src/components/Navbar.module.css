@@ -147,6 +147,16 @@
   transform: translateY(-8px) rotate(-45deg);
 }
 
+/* Close button — hidden on desktop */
+.closeDrawer {
+  display: none;
+}
+
+/* Backdrop — hidden on desktop */
+.backdrop {
+  display: none;
+}
+
 /* Mobile nav drawer */
 @media (max-width: 900px) {
   .navigation {
@@ -166,6 +176,7 @@
     transform: translateX(100%);
     opacity: 0;
     z-index: 130;
+    transition: transform 0.35s ease, opacity 0.35s ease;
   }
 
   .open {
@@ -184,6 +195,41 @@
   /* Hide desktop Reserve button — it's in the drawer */
   .reserveButton {
     display: none;
+  }
+
+  /* Close button inside the drawer */
+  .closeDrawer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-bright);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .closeDrawer:hover {
+    background: rgba(247, 163, 36, 0.18);
+    color: var(--accent);
+    transform: rotate(90deg);
+  }
+
+  /* Backdrop that dims the rest of the page */
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 125;
+    backdrop-filter: blur(2px);
   }
 }
 
