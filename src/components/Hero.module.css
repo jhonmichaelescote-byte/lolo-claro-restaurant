@@ -6,7 +6,6 @@
   justify-content: center;
   align-items: center;
   padding: 4rem 1.5rem 3rem;
-  background-image: linear-gradient(180deg, var(--hero-overlay-top), var(--hero-overlay-bottom)), url('https://images.unsplash.com/photo-1541542684-3e9f578f0d6e?auto=format&fit=crop&w=1600&q=80');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -31,6 +30,11 @@
   animation: fadeUp 0.9s ease both;
 }
 
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .tag {
   display: inline-flex;
   align-items: center;
@@ -47,15 +51,15 @@
   border-radius: 999px;
 }
 
-h1 {
-  font-size: clamp(3rem, 5vw, 4.6rem);
+.heroContent h1 {
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
   line-height: 1.02;
   margin: 1.4rem 0 1rem;
   letter-spacing: -0.05em;
   color: #ffffff;
 }
 
-p {
+.heroContent p {
   max-width: 780px;
   margin: 0 auto 2.4rem;
   color: var(--hero-paragraph);
@@ -177,11 +181,80 @@ p {
 }
 
 @keyframes scroll-bounce {
-  0%, 100% {
-    transform: translateY(0);
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+    padding: 7rem 1.25rem 4rem;
+    background-attachment: scroll; /* fixed causes layout bugs on iOS */
   }
 
-  50% {
-    transform: translateY(8px);
+  .heroContent {
+    max-width: 100%;
+  }
+
+  .heroContent h1 {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+    line-height: 1.08;
+    margin: 1rem 0;
+  }
+
+  .heroContent p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    padding: 0.7rem 1rem;
+  }
+
+  .ctaGroup {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 280px;
+    min-width: unset;
+  }
+
+  .heroDetails {
+    margin-top: 2.5rem;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .scrollPrompt {
+    display: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .hero {
+    padding: 6rem 1rem 3rem;
+  }
+
+  .heroContent h1 {
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
+  }
+
+  .heroDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .detailCard {
+    padding: 1.1rem 1.1rem;
+    border-radius: 18px;
   }
 }
