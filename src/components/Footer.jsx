@@ -1,41 +1,150 @@
-import styles from './Footer.module.css';
-import facebookIcon from '../assets/facebook.png';
-
-export default function Footer() {
-  return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
-        <div className={styles.grid}>
-          <div>
-            <p className={styles.brand}>Lolo Claro's Restaurant</p>
-            <p className={styles.description}>Elegant dining with a modern Filipino twist, crafted for every occasion.</p>
-            <div className={styles.socials}>
-              <a href="https://www.facebook.com/loloclaros" target="_blank" rel="noreferrer" aria-label="Facebook" className={styles.socialIcon}>
-                <img src={facebookIcon} alt="Facebook" className={styles.socialImg} />
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h4 className={styles.heading}>Quick Links</h4>
-            <a href="#home" className={styles.link}>Home</a>
-            <a href="#menu" className={styles.link}>Menu</a>
-            <a href="#reservation" className={styles.link}>Reservation</a>
-          </div>
-
-          <div>
-            <h4 className={styles.heading}>Business Hours</h4>
-            <p className={styles.hours}>Mon - Thurs<br />8:30 AM - 7:30 PM</p>
-            <p className={styles.hours}>Fri - Sun<br />8:00 AM - 8:00 PM</p>
-          </div>
-        </div>
-
-        <div className={styles.divider} />
-
-        <div className={styles.copyright}>
-          <span>© 2026 Lolo Claro's Restaurant. All rights reserved.</span>
-        </div>
-      </div>
-    </footer>
-  );
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(7, 8, 11, 0.95);
+  color: var(--text-bright);
+  position: relative;
+  overflow: hidden;
+}
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 2rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+.brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.description {
+  color: var(--text-soft);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+.heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 1.2rem;
+  opacity: 1;
+}
+.link {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+.link:hover,
+.link:focus-visible {
+  color: var(--accent);
+}
+.link:focus-visible {
+  outline: 3px solid rgba(247, 163, 36, 0.35);
+  outline-offset: 3px;
+}
+.hours {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.socials {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.socialIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  color: var(--text-bright);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.04);
+}
+.socialIcon:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(255, 170, 0, 0.12);
+  transform: translateY(-3px);
+}
+.socialImg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  object-fit: contain;
+}
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  margin-bottom: 1.5rem;
+}
+.copyright {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+/* Tablet */
+@media (max-width: 760px) {
+  .container {
+    padding: 2.5rem 1.5rem 1.5rem;
+  }
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .grid > div:first-child {
+    grid-column: 1 / -1;
+  }
+}
+/* Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: 2rem 1rem 1.25rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .grid > div:first-child {
+    grid-column: auto;
+  }
+  .brand {
+    font-size: 1.1rem;
+  }
+  .socialIcon {
+    width: 38px;
+    height: 38px;
+  }
+  .copyright {
+    font-size: 0.8rem;
+  }
 }
