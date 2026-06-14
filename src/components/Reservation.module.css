@@ -55,6 +55,9 @@ select {
   padding: 1rem 1.15rem;
   font-size: 0.95rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  /* Prevent iOS zoom on focus (font-size must be ≥16px on mobile) */
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 input:hover,
@@ -78,6 +81,7 @@ small {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   padding: 1rem 1.8rem;
   border-radius: 999px;
   border: none;
@@ -85,7 +89,9 @@ small {
   color: #080707;
   font-weight: 700;
   cursor: pointer;
+  font-size: 1rem;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-top: 0.5rem;
 }
 
 .submitButton:hover {
@@ -97,10 +103,49 @@ small {
   margin-top: 1rem;
   color: var(--accent);
   font-weight: 600;
+  text-align: center;
 }
 
+/* Tablet: stack form rows */
 @media (max-width: 700px) {
   .rowGroup {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .reservation {
+    padding: 3.5rem 1rem;
+  }
+
+  .sectionTag {
+    font-size: 0.85rem;
+    letter-spacing: 0.13em;
+  }
+
+  .formWrapper {
+    padding: 1.5rem 1.1rem;
+    border-radius: 22px;
+  }
+
+  /* Prevent iOS zoom: inputs need font-size 16px on mobile */
+  input,
+  select {
+    font-size: 1rem;
+    border-radius: 14px;
+    padding: 0.9rem 1rem;
+  }
+}
+
+/* Extra small */
+@media (max-width: 400px) {
+  .reservation {
+    padding: 2.5rem 0.75rem;
+  }
+
+  .formWrapper {
+    padding: 1.2rem 0.9rem;
+    border-radius: 18px;
   }
 }
