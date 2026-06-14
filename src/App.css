@@ -234,3 +234,32 @@ img {
     padding: 4rem 1rem;
   }
 }
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Extra guard: prevents transformed/off-canvas elements from creating layout width */
+html {
+  max-width: 100vw;
+}
+
+
+/* Mobile-first horizontal padding guard (prevents “not fit” feeling) */
+main,
+.section {
+  padding-inline: clamp(0.9rem, 3.5vw, 1.5rem);
+}
+
+@media (max-width: 420px) {
+  main,
+  .section {
+    padding-inline: 0.75rem;
+  }
+
+  /* Fixed widgets: avoid covering content too aggressively */
+  .sticky-cta {
+    bottom: 5.4rem;
+  }
+}
+
