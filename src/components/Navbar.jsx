@@ -29,12 +29,31 @@ export default function Navbar({ darkMode, setDarkMode }) {
           className={`${styles.navigation} ${menuOpen ? styles.open : ''}`}
           aria-label="Primary navigation"
         >
+          {/* Close button inside the drawer */}
+          <button
+            type="button"
+            className={styles.closeDrawer}
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close navigation menu"
+          >
+            ✕
+          </button>
+
           {links.map((link) => (
             <a key={link.href} href={link.href} className={styles.navLink} onClick={handleLink}>
               {link.label}
             </a>
           ))}
         </nav>
+
+        {/* Backdrop overlay */}
+        {menuOpen && (
+          <div
+            className={styles.backdrop}
+            onClick={() => setMenuOpen(false)}
+            aria-hidden="true"
+          />
+        )}
 
         <div className={styles.actions}>
           <a href="#reservation" className={styles.reserveButton} onClick={handleLink}>
