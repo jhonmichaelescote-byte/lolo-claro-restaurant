@@ -184,6 +184,7 @@ img {
   position: fixed;
   bottom: 6rem;
   right: 1.6rem;
+  max-width: calc(100vw - 2rem);
   display: inline-flex;
   align-items: center;
   justify-content: center;
