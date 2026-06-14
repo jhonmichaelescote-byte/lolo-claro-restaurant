@@ -22,7 +22,8 @@
 }
 
 .categoryBlock {
-  margin-top: 2.75rem;
+  max-width: 1180px;
+  margin: 2.75rem auto 0;
   padding: 2rem;
   border-radius: 32px;
   background: rgba(247, 163, 36, 0.05);
@@ -52,31 +53,14 @@
   animation: cardReveal 0.6s ease forwards;
 }
 
-.cardsWrap .card:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.cardsWrap .card:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.cardsWrap .card:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-.cardsWrap .card:nth-child(4) {
-  animation-delay: 0.4s;
-}
+.cardsWrap .card:nth-child(1) { animation-delay: 0.1s; }
+.cardsWrap .card:nth-child(2) { animation-delay: 0.2s; }
+.cardsWrap .card:nth-child(3) { animation-delay: 0.3s; }
+.cardsWrap .card:nth-child(4) { animation-delay: 0.4s; }
 
 @keyframes cardReveal {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .card:hover {
@@ -108,6 +92,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
+  flex-wrap: wrap;
   margin-bottom: 0.9rem;
 }
 
@@ -119,10 +104,66 @@
 .cardBody span {
   color: var(--accent);
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .cardBody p {
   margin: 0;
   color: var(--text-soft);
   line-height: 1.85;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .menu {
+    padding: 3.5rem 1rem;
+  }
+
+  .headingRow h2 {
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
+  }
+
+  .sectionTag {
+    font-size: 0.85rem;
+    letter-spacing: 0.13em;
+  }
+
+  .categoryBlock {
+    padding: 1.3rem 1rem;
+    border-radius: 20px;
+    margin-top: 1.75rem;
+  }
+
+  .categoryBlock h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .cardsWrap {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card {
+    border-radius: 20px;
+  }
+
+  .card img {
+    height: 200px;
+  }
+
+  .cardBody {
+    padding: 1.2rem 1rem 1.1rem;
+  }
+}
+
+/* Extra small */
+@media (max-width: 400px) {
+  .menu {
+    padding: 2.5rem 0.75rem;
+  }
+
+  .card img {
+    height: 175px;
+  }
 }
