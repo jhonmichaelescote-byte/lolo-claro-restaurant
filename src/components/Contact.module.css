@@ -1,0 +1,117 @@
+.contact {
+  padding: 5rem 1.5rem 3rem;
+  position: relative;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+  width: 18rem;
+  height: 18rem;
+  background: radial-gradient(circle at center, rgba(247, 163, 36, 0.12), transparent 56%);
+  pointer-events: none;
+}
+
+.sectionTag {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+}
+
+.topRow {
+  max-width: 1180px;
+  margin: 0 auto 2.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 2rem;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.infoPanel {
+  display: grid;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2.25rem;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.infoPanel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.2);
+  border-color: rgba(247, 163, 36, 0.22);
+}
+
+.infoPanel h3,
+.infoPanel h4 {
+  margin: 0 0 0.6rem;
+}
+
+.infoPanel p,
+.infoPanel a,
+.infoPanel address {
+  margin: 0.4rem 0;
+  color: var(--text-soft);
+  text-decoration: none;
+  line-height: 1.75;
+}
+
+.infoPanel a:hover {
+  color: var(--accent);
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.socials a {
+  border-radius: 999px;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-soft);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.socials a:hover {
+  background: rgba(255, 170, 0, 0.14);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.mapFrame {
+  min-height: 460px;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.22);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.mapFrame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 42px 98px rgba(0, 0, 0, 0.24);
+}
+
+.mapFrame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
