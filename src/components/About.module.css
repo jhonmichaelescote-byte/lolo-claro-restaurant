@@ -154,8 +154,74 @@
   color: var(--accent);
 }
 
+/* Tablet */
 @media (max-width: 920px) {
   .contentGrid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .visual::before {
+    width: 260px;
+    height: 260px;
+    right: -4%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .about {
+    padding: 3.5rem 1rem;
+  }
+
+  .contentGrid {
+    gap: 2rem;
+  }
+
+  .imageFrame {
+    border-radius: 20px;
+  }
+
+  .copy h2 {
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
+    margin-bottom: 1rem;
+  }
+
+  .sectionTag {
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+  }
+
+  .values > div {
+    padding: 1.1rem 1.1rem;
+    border-radius: 18px;
+  }
+
+  .whyChoose {
+    padding: 1.3rem 1.2rem;
+    border-radius: 20px;
+  }
+
+  .visual::before {
+    display: none; /* hide decorative blob — causes overflow on small screens */
+  }
+}
+
+/* Extra small (e.g. 360px phones) */
+@media (max-width: 400px) {
+  .about {
+    padding: 2.5rem 0.75rem;
+  }
+
+  .copy h2 {
+    font-size: 1.55rem;
+  }
+
+  .values > div {
+    padding: 1rem;
+  }
+
+  .whyChoose {
+    padding: 1rem;
   }
 }
