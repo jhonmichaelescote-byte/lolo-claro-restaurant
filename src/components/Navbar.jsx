@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Navbar.module.css';
 
 const links = [
@@ -12,24 +12,45 @@ const links = [
 
 export default function Navbar({ darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const handleLink = () => {
-    setMenuOpen(false);
-  };
+  // Add shadow when page is scrolled past 10px
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const handleLink = () => setMenuOpen(false);
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.navbar}>
-        <a href="#home" className={styles.brand} aria-label="Restaurant logo">
+        <a href="#home" className={styles.brand} aria-label="Go to homepage">
           Lolo Claro's Restaurant
         </a>
+
+        {/* Mobile backdrop */}
+        {menuOpen && (
+          <div
+            className={styles.backdrop}
+            onClick={() => setMenuOpen(false)}
+            aria-hidden="true"
+          />
+        )}
 
         <nav
           id="site-navigation"
           className={`${styles.navigation} ${menuOpen ? styles.open : ''}`}
           aria-label="Primary navigation"
         >
-          {/* Close button inside the drawer */}
+          {/* Close button inside drawer */}
           <button
             type="button"
             className={styles.closeDrawer}
@@ -40,20 +61,16 @@ export default function Navbar({ darkMode, setDarkMode }) {
           </button>
 
           {links.map((link) => (
-            <a key={link.href} href={link.href} className={styles.navLink} onClick={handleLink}>
+            <a
+              key={link.href}
+              href={link.href}
+              className={styles.navLink}
+              onClick={handleLink}
+            >
               {link.label}
             </a>
           ))}
         </nav>
-
-        {/* Backdrop overlay */}
-        {menuOpen && (
-          <div
-            className={styles.backdrop}
-            onClick={() => setMenuOpen(false)}
-            aria-hidden="true"
-          />
-        )}
 
         <div className={styles.actions}>
           <a href="#reservation" className={styles.reserveButton} onClick={handleLink}>
@@ -64,9 +81,9 @@ export default function Navbar({ darkMode, setDarkMode }) {
             type="button"
             className={styles.themeToggle}
             onClick={() => setDarkMode(!darkMode)}
-            aria-label="Toggle theme"
+            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
           >
-            {darkMode ? '☀️' : '🌙'}
+            {darkMode ? '☀️' : 'ߌ٧}
           </button>
 
           <button
