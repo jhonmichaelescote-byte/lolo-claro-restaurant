@@ -1,10 +1,24 @@
+
 .header {
   position: sticky;
   top: 0;
   z-index: 120;
   background: var(--surface);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
+ 
+  transition: box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+
+.header.scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  border-bottom-color: transparent;
+}
+
+html[data-theme='light'] .header.scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 .navbar {
@@ -24,11 +38,11 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   text-decoration: none;
-  /* Prevent brand from getting squeezed */
   flex-shrink: 0;
   max-width: 55vw;
   line-height: 1.3;
 }
+
 
 .navigation {
   display: flex;
@@ -67,6 +81,7 @@
   width: 100%;
 }
 
+
 .actions {
   display: flex;
   align-items: center;
@@ -85,13 +100,13 @@
   text-decoration: none;
   font-weight: 700;
   font-size: 0.9rem;
-  box-shadow: 0 18px 38px rgba(247, 163, 36, 0.22);
+  box-shadow: 0 8px 24px rgba(247, 163, 36, 0.22);
   transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 
 .reserveButton:hover {
   transform: translateY(-2px);
-  opacity: 0.95;
+  box-shadow: 0 14px 32px rgba(247, 163, 36, 0.3);
 }
 
 .themeToggle {
@@ -107,10 +122,11 @@
 }
 
 .themeToggle:hover {
-  background: rgba(247, 163, 36, 0.14);
-  border-color: rgba(247, 163, 36, 0.22);
+  background: var(--accent-soft);
+  border-color: var(--accent);
   transform: translateY(-1px);
 }
+
 
 .burger {
   display: none;
@@ -124,12 +140,18 @@
   flex-direction: column;
   justify-content: space-between;
   flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.burger:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
 }
 
 .burger span {
   display: block;
   width: 100%;
-  height: 3px;
+  height: 2.5px;
   border-radius: 999px;
   background: var(--text-bright);
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -147,17 +169,17 @@
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Close button — hidden on desktop */
+
 .closeDrawer {
   display: none;
 }
 
-/* Backdrop — hidden on desktop */
+
 .backdrop {
   display: none;
 }
 
-/* Mobile nav drawer */
+
 @media (max-width: 900px) {
   .navigation {
     position: fixed;
@@ -165,18 +187,24 @@
     right: 0;
     min-height: 100vh;
     min-height: 100dvh;
-    width: min(320px, 80vw);
+    width: min(320px, 82vw);
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.75rem;
-    padding: 5rem 1.5rem;
-    background: rgba(7, 8, 11, 0.97);
-    backdrop-filter: blur(20px);
+    padding: 5rem 1.5rem 3rem;
+
+    
+    background: var(--surface-strong);
+    border-left: 1px solid var(--border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
     transform: translateX(100%);
     opacity: 0;
     z-index: 130;
-    transition: transform 0.35s ease, opacity 0.35s ease;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.35s ease;
   }
 
   .open {
@@ -184,56 +212,62 @@
     opacity: 1;
   }
 
+  
   .navLink {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    color: var(--text-bright);
+    font-weight: 600;
   }
 
   .burger {
     display: flex;
   }
 
-  /* Hide desktop Reserve button — it's in the drawer */
+ 
   .reserveButton {
     display: none;
   }
 
-  /* Close button inside the drawer */
+ 
   .closeDrawer {
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
+    top: 1.1rem;
+    right: 1.1rem;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border);
+    background: var(--surface-card);
     color: var(--text-bright);
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.25s ease,
+                border-color 0.2s ease;
   }
 
   .closeDrawer:hover {
-    background: rgba(247, 163, 36, 0.18);
+    background: var(--accent-soft);
+    border-color: var(--accent);
     color: var(--accent);
     transform: rotate(90deg);
   }
 
-  /* Backdrop that dims the rest of the page */
+ 
   .backdrop {
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.45);
     z-index: 125;
     backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
   }
 }
 
-/* Small phones */
+
 @media (max-width: 400px) {
   .navbar {
     padding: 0.85rem 1rem;
