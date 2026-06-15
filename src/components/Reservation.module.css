@@ -1,6 +1,7 @@
 .reservation {
   padding: 5rem 1.5rem;
 }
+
 .sectionTag {
   display: inline-block;
   margin-bottom: 1rem;
@@ -9,41 +10,47 @@
   font-size: 1.05rem;
   text-transform: uppercase;
 }
+
 .headingRow {
   max-width: 1180px;
   margin: 0 auto 2.5rem;
 }
+
 .formWrapper {
   max-width: 940px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: var(--surface-card);
+  border: 1px solid var(--border);
   border-radius: 34px;
   padding: 2.5rem;
   box-shadow: 0 45px 100px rgba(0, 0, 0, 0.18);
 }
+
 .rowGroup {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin-bottom: 1.25rem;
 }
+
 label {
   display: block;
   color: var(--text-soft);
   font-size: 0.95rem;
   margin-bottom: 0.75rem;
 }
+
 .fieldGroup {
   display: grid;
   gap: 0.75rem;
 }
+
 input,
 select {
   width: 100%;
   border-radius: 18px;
-  border: 1px solid rgba(128, 128, 128, 0.35);
-  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid var(--border);
+  background: var(--surface-strong);
   color: var(--text-bright);
   padding: 1rem 1.15rem;
   font-size: 0.95rem;
@@ -51,20 +58,35 @@ select {
   -webkit-appearance: none;
   appearance: none;
 }
+
+/* Light mode: clearly visible borders and white background */
+html[data-theme='light'] input,
+html[data-theme='light'] select {
+  border-color: rgba(31, 26, 22, 0.3);
+  background: #ffffff;
+  color: var(--text-bright);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
 input:hover,
 select:hover {
-  border-color: rgba(247, 163, 36, 0.24);
+  border-color: var(--accent);
 }
+
 input:focus,
 select:focus {
-  outline: 2px solid rgba(255, 170, 0, 0.18);
-  outline-offset: 2px;
-  border-color: rgba(255, 170, 0, 0.3);
-  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(247, 163, 36, 0.18);
 }
+
 small {
   color: #ff9b72;
 }
+
 .submitButton {
   display: inline-flex;
   align-items: center;
@@ -81,35 +103,43 @@ small {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   margin-top: 0.5rem;
 }
+
 .submitButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 18px 40px rgba(255, 170, 0, 0.24);
 }
+
 .successMessage {
   margin-top: 1rem;
   color: var(--accent);
   font-weight: 600;
   text-align: center;
 }
+
 /* Tablet: stack form rows */
 @media (max-width: 700px) {
   .rowGroup {
     grid-template-columns: 1fr;
   }
 }
+
 /* Mobile */
 @media (max-width: 640px) {
   .reservation {
     padding: 3.5rem 1rem;
   }
+
   .sectionTag {
     font-size: 0.85rem;
     letter-spacing: 0.13em;
   }
+
   .formWrapper {
     padding: 1.5rem 1.1rem;
     border-radius: 22px;
   }
+
+  /* Prevent iOS zoom: inputs need font-size 16px on mobile */
   input,
   select {
     font-size: 1rem;
@@ -117,11 +147,13 @@ small {
     padding: 0.9rem 1rem;
   }
 }
+
 /* Extra small */
 @media (max-width: 400px) {
   .reservation {
     padding: 2.5rem 0.75rem;
   }
+
   .formWrapper {
     padding: 1.2rem 0.9rem;
     border-radius: 18px;
