@@ -70,7 +70,10 @@ else if (!goingDown || currentScrollY < 50) {
   };
 };
 
-const animateMagnet = () => {
+
+  
+ useEffect(() => {
+   const animateMagnet = () => {
    if (!mouse.current) return;
 
   navRef.current.forEach((el) => {
@@ -99,8 +102,6 @@ const animateMagnet = () => {
   });
        animationFrame.current = requestAnimationFrame(animateMagnet);
 };
-  
- useEffect(() => {
   animationFrame.current = requestAnimationFrame(animateMagnet);
 
   return () => cancelAnimationFrame(animationFrame.current);
