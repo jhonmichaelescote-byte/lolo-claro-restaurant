@@ -8,6 +8,11 @@
   background: var(--surface);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+
+  transition: transform 0.35s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.hidden {
+  transform: translateY(-100%);
 }
 
 
