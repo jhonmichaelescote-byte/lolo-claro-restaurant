@@ -12,14 +12,29 @@ const links = [
 
 export default function Navbar({ darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   // Add shadow when page is scrolled past 10px
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+ useEffect(() => {
+  let lastScrollY = window.scrollY;
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 80) {
+      setHidden(true); // scroll down → hide navbar
+    } else {
+      setHidden(false); // scroll up → show navbar
+    }
+
+    lastScrollY = currentScrollY;
+    setScrolled(currentScrollY > 10);
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -30,7 +45,13 @@ export default function Navbar({ darkMode, setDarkMode }) {
   const handleLink = () => setMenuOpen(false);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+   <header
+  className={`
+    ${styles.header}
+    ${scrolled ? styles.scrolled : ''}
+    ${hidden ? styles.hidden : ''}
+  `}
+>
       <div className={styles.navbar}>
         <a href="#home" className={styles.brand} aria-label="Go to homepage">
           Lolo Claro's Restaurant
