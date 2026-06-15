@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './Reservation.module.css';
+import styles from '../Reservation.module.css';
 
 const initialState = {
   name: '',
