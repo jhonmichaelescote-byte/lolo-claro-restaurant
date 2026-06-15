@@ -36,9 +36,9 @@ useEffect(() => {
 
     if (goingDown && fastScroll && currentScrollY > 80) {
       setHidden(true);
-    } else {
-      setHidden(false);
-    }
+    } else if (!goingDown) {
+  setHidden(false);
+}
 
     setScrolled(currentScrollY > 10);
 
