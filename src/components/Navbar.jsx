@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useRef } from 'react';
 import styles from './Navbar.module.css';
+
+const navRef = useRef([]);
+const animationFrame = useRef(null);
+const mouse = useRef({ x: 0, y: 0 });
 
 const links = [
   { label: 'Home', href: '#home' },
@@ -56,6 +61,47 @@ useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
+  useEffect(() => {
+  animationFrame.current = requestAnimationFrame(animateMagnet);
+
+  return () => cancelAnimationFrame(animationFrame.current);
+}, []);
+
+  const handleMouseMove = (e) => {
+  mouse.current = {
+    x: e.clientX,
+    y: e.clientY,
+  };
+};
+
+const animateMagnet = () => {
+  navRef.current.forEach((el) => {
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+
+    const dx = mouse.current.x - (rect.left + rect.width / 2);
+    const dy = mouse.current.y - (rect.top + rect.height / 2);
+
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    const maxDistance = 120;
+
+    if (distance < maxDistance) {
+      const strength = 1 - distance / maxDistance;
+
+      const moveX = dx * strength * 0.25;
+      const moveY = dy * strength * 0.25;
+
+      el.style.transform =
+        `translate(${moveX}px, ${moveY}px) scale(${1 + strength * 0.08})`;
+    } else {
+      el.style.transform = `translate(0px, 0px) scale(1)`;
+    }
+  });
+
+  animationFrame.current = requestAnimationFrame(animateMagnet);
+};
 
   const handleLink = () => setMenuOpen(false);
 
@@ -81,11 +127,12 @@ useEffect(() => {
           />
         )}
 
-        <nav
-          id="site-navigation"
-          className={`${styles.navigation} ${menuOpen ? styles.open : ''}`}
-          aria-label="Primary navigation"
-        >
+       <nav
+         id="site-navigation"
+         className={`${styles.navigation} ${menuOpen ? styles.open : ''}`}
+         aria-label="Primary navigation"
+         onMouseMove={handleMouseMove}
+       >
           {/* Close button inside drawer */}
           <button
             type="button"
@@ -101,6 +148,7 @@ useEffect(() => {
               key={link.href}
               href={link.href}
               className={styles.navLink}
+              ref={(el) => (navRef.current[i] = el)}
               onClick={handleLink}
             >
               {link.label}
