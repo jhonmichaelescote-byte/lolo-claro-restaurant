@@ -94,9 +94,9 @@
 }
 
 .secondaryButton {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.28);
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.55);
 }
 
 .primaryButton:hover,
@@ -142,7 +142,7 @@
 }
 
 .detailCard span {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.7);
   letter-spacing: 0.12em;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -190,7 +190,7 @@
   .hero {
     min-height: 100svh;
     padding: 7rem 1.25rem 4rem;
-    background-attachment: scroll;
+    background-attachment: scroll; /* fixed causes layout bugs on iOS */
   }
 
   .heroContent {
@@ -257,4 +257,28 @@
     padding: 1.1rem 1.1rem;
     border-radius: 18px;
   }
+}
+
+/* Light mode overrides */
+html[data-theme='light'] .secondaryButton {
+  background: rgba(31, 26, 22, 0.12);
+  color: #1f1a16;
+  border-color: rgba(31, 26, 22, 0.25);
+}
+
+html[data-theme='light'] .secondaryButton:hover {
+  background: rgba(31, 26, 22, 0.2);
+}
+
+html[data-theme='light'] .detailCard {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(31, 26, 22, 0.15);
+}
+
+html[data-theme='light'] .detailCard span {
+  color: #4e4a44;
+}
+
+html[data-theme='light'] .detailCard strong {
+  color: #1f1a16;
 }
