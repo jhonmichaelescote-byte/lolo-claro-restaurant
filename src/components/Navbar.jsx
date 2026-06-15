@@ -15,24 +15,39 @@ export default function Navbar({ darkMode, setDarkMode }) {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Add shadow when page is scrolled past 10px
- useEffect(() => {
+useEffect(() => {
   let lastScrollY = window.scrollY;
+  let lastTime = Date.now();
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
+    const currentTime = Date.now();
 
-    if (currentScrollY > lastScrollY && currentScrollY > 80) {
-      setHidden(true); // scroll down → hide navbar
+    const deltaY = currentScrollY - lastScrollY;
+    const deltaTime = currentTime - lastTime;
+
+    // scroll speed (pixels per ms)
+    const velocity = Math.abs(deltaY / deltaTime);
+
+    const goingDown = deltaY > 0;
+
+    // thresholds (you can tweak these later)
+    const fastScroll = velocity > 0.5;
+
+    if (goingDown && fastScroll && currentScrollY > 80) {
+      setHidden(true);
     } else {
-      setHidden(false); // scroll up → show navbar
+      setHidden(false);
     }
 
-    lastScrollY = currentScrollY;
     setScrolled(currentScrollY > 10);
+
+    lastScrollY = currentScrollY;
+    lastTime = currentTime;
   };
 
   window.addEventListener('scroll', handleScroll, { passive: true });
+
   return () => window.removeEventListener('scroll', handleScroll);
 }, []);
 
